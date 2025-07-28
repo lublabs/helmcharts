@@ -1,4 +1,4 @@
-# Generic OU/DISC Helm Chart
+# Generic LubLabs Helm Chart
 
 > This is a fork of the DBVIS Generic Helm Chart kindly provided by the Data Analysis and Visualization Group, University of Konstanz, Germany.
 

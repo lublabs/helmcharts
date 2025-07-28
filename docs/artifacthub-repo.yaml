@@ -11,8 +11,8 @@
 #
 repositoryID: 9e8f5223-c9ba-48bf-8ebb-4be98d1ae369
 owners: # (optional, used to claim repository ownership)
-  - name: Wolfgang Jentner
-    email: wjentner@ou.edu
+  - name: Mahmoud Mousa Hamad
+    email: mahmoud@lublabs.com
 ignore: # (optional, packages that should not be indexed by Artifact Hub)
 #   - name: package1
 #   - name: package2 # Exact match
