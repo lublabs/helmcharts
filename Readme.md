@@ -1,6 +1,6 @@
-# DISC Helm Charts
+# LubLabs Helm Charts
 
-[![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/ou-disc-charts)](https://artifacthub.io/packages/search?repo=ou-disc-charts)
+[![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/lublabs-charts)](https://artifacthub.io/packages/search?repo=lublabs-charts)
 
 ## Development
 
@@ -8,5 +8,5 @@
 2. Adjust documentation.
 3. Adjust changelog.
 4. Adjust Chart.yaml
-5. `helm package -d docs ./disc-generic`
-6. `helm repo index --url https://ou-disc.github.io/helmcharts ./docs`
+5. `helm package -d docs ./lublabs-generic`
+6. `helm repo index --url https://lublabs.github.io/helmcharts ./docs`
