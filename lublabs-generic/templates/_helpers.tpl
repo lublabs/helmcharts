@@ -4,7 +4,7 @@ deploymentName: {{ .Release.Name | quote }}
 {{- end }}
 
 {{- define "nginx.annotations" }}
-cert-manager.io/cluster-issuer: {{ default "letsencrypt-prod" .Values.app.certManager.clusterIssuer | quote }}
+cert-manager.io/cluster-issuer: {{ default "letsencrypt-prod" .Values.certManager.clusterIssuer }}
 {{- end }}
 
 
