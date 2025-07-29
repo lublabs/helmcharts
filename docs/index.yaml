@@ -17,9 +17,9 @@ entries:
           description: Fixed cert-manager.io/cluster-issuer annotation value in nginx template
     apiVersion: v1
     appVersion: 1.0.0
-    created: "2025-07-29T10:40:31.145109-05:00"
+    created: "2025-07-29T10:56:51.8130416-05:00"
     description: Deploys a LubLabs app
-    digest: 9e8bf1297b29f31d2130b130faf38c9fdaa48b71ed00b5b44184fc4d73aa274e
+    digest: d7bc14ddf7d0dc4fe77d1192e869ae9064f4fba79dc7bc256fb0322b9831b5b5
     home: https://github.com/lublabs/helmcharts
     maintainers:
     - email: mahmoud@lublabs.com
@@ -28,4 +28,4 @@ entries:
     urls:
     - https://lublabs.github.io/helmcharts/lublabs-generic-3.11.0.tgz
     version: 3.11.0
-generated: "2025-07-29T10:40:31.1438757-05:00"
+generated: "2025-07-29T10:56:51.8118613-05:00"
