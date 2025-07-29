@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.11.0
+
+Allows to add cert-manager.io/cluster-issuer.
+
+## 3.10.0
+
+Unknown.
+
 ## 3.9.0
 
 Changed default value `app.pvc.storageClassName` to `null` to use the default storage class of the cluster.

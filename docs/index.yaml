@@ -13,11 +13,13 @@ entries:
           description: added app.extraPvcs
         - kind: fixed
           description: Updated documentation
+        - kind: fixed
+          description: Fixed cert-manager.io/cluster-issuer annotation value in nginx template
     apiVersion: v1
     appVersion: 1.0.0
-    created: "2025-07-28T15:48:56.818161-05:00"
+    created: "2025-07-29T10:17:27.1204638-05:00"
     description: Deploys a LubLabs app
-    digest: 5238840a3d31c52433893bcd7e8515816c3713ab4b12d44c839a0b1adf3d27fc
+    digest: 5caf327e5222dacc3ca8ee3938d3293b6a80d82f6d963c03d15daa0601c576d9
     home: https://github.com/lublabs/helmcharts
     maintainers:
     - email: mahmoud@lublabs.com
@@ -26,4 +28,4 @@ entries:
     urls:
     - https://lublabs.github.io/helmcharts/lublabs-generic-3.11.0.tgz
     version: 3.11.0
-generated: "2025-07-28T15:48:56.8171283-05:00"
+generated: "2025-07-29T10:17:27.1204638-05:00"

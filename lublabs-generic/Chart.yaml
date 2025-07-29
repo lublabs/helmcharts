@@ -19,3 +19,5 @@ annotations:
       description: added app.extraPvcs
     - kind: fixed
       description: Updated documentation
+    - kind: fixed
+      description: Fixed cert-manager.io/cluster-issuer annotation value in nginx template
