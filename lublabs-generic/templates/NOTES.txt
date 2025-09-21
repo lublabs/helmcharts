@@ -27,4 +27,4 @@
 |  $ helm get all {{ .Release.Name }}
 |
 |
-| For any questions regarding this chart contact support@dbvis.inf.uni-konstanz.de
+| For any questions regarding this chart contact info@lublabs.com
