@@ -167,11 +167,14 @@ spec:
               {{- end }}
             {{- end }}
           {{- end }}
+      {{- with .Values.app.extraContainers }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       {{- with .Values.app.regcred }}
       imagePullSecrets:
           - name: {{ . }}
       {{- end }}
-      {{- if or .Values.app.pvc.enabled .Values.app.hostVolumes .Values.app.configMapVolumes .Values.app.secretVolumes .Values.app.extraPvcs }}
+      {{- if or .Values.app.pvc.enabled .Values.app.hostVolumes .Values.app.configMapVolumes .Values.app.secretVolumes .Values.app.extraPvcs .Values.app.extraVolumes }}
       volumes:
         {{- if .Values.app.pvc.enabled }}
         - name: myglusterfsvol
@@ -216,6 +219,9 @@ spec:
                 path: {{ .path }}
               {{- end }}
             {{- end }}
+        {{- end }}
+        {{- with .Values.app.extraVolumes }}
+        {{- toYaml . | nindent 8 }}
         {{- end }}
       {{- end }}
       {{- if or .Values.app.requests.gpu .Values.app.podAntiAffinity }}
