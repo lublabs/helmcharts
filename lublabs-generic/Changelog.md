@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.12.0
+
+Added support for sidecar containers and extra volumes.
+
+- `app.extraContainers` — inject additional containers (sidecars) into the pod alongside the main application container.
+- `app.extraVolumes` — define additional pod-level volumes that can be mounted by sidecar containers.
+
 ## 3.11.0
 
 Allows to add cert-manager.io/cluster-issuer.
@@ -18,6 +25,7 @@ Rename `app.image.cmd` -> `app.cmd` and `app.image.args` -> `app.args` (backward
 Allows to add a node port to the service via `app.nodePort`.
 
 ## 3.7.0
+
 Allows to specify the podSecurityContext which is applied to all containers of the pod.
 The PodSecurityContext allows to overwrite the user and group that runs the container as well as to specify the group under which all volumes are being mounted.
 More information here: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
@@ -35,48 +43,49 @@ app:
 ```
 
 ## 3.6.0
+
 This change allows for secret volumes, that is a secret that is mounted as files into you container.
 This is similar to config map volumes.
 
 ```yaml
 app:
   secretVolumes:
-  ## if you want to use the secrets defined below, prefix secretName with "${$.Release.Name}"
-  - name: secret1vol
-    secretName: "{{ $.Release.Name }}-secret1"
-    mountPath: /mysecrets/secret1
-  ## This is the default. Secrets should not be changed from a container
-    readOnly: true
-  
-  ## The following secret defined in the secretvolume must be generated manually as it does not use the .Release.Name-prefix
-  - name: secret2vol
-    secretName: my-manual-secret
-    mountPath: /mymanualsecret
+    ## if you want to use the secrets defined below, prefix secretName with "${$.Release.Name}"
+    - name: secret1vol
+      secretName: "{{ $.Release.Name }}-secret1"
+      mountPath: /mysecrets/secret1
+      ## This is the default. Secrets should not be changed from a container
+      readOnly: true
+
+    ## The following secret defined in the secretvolume must be generated manually as it does not use the .Release.Name-prefix
+    - name: secret2vol
+      secretName: my-manual-secret
+      mountPath: /mymanualsecret
 
   secrets:
-  ## Secrets defined here will be automatically prefixed with .Release.Name to avoid any collisions.
-  - name: secret1
-  ## this will be resolved as {{.Release.Name}}-secret1
-  ## The default type is Opaque
-    type: Opaque
-  ## If this is false the deployment will fail if the secret does not exist
-    optional: true
-  ## Define the stringData for your secret. The .stringData assumes LITERAL strings
-    stringData:
-      file1: |-
-        This is a multiline
-        secret
-      file2: This is a single line secret
-  ## Optional: Define data for your secret. The .data assumes BASE64 ENCODED strings
-  ## The value for file3 is "this is a test" with base64 encoding
-    data:
-      file3: dGhpcyBpcyBhIHRlc3Q=
-
+    ## Secrets defined here will be automatically prefixed with .Release.Name to avoid any collisions.
+    - name: secret1
+      ## this will be resolved as {{.Release.Name}}-secret1
+      ## The default type is Opaque
+      type: Opaque
+      ## If this is false the deployment will fail if the secret does not exist
+      optional: true
+      ## Define the stringData for your secret. The .stringData assumes LITERAL strings
+      stringData:
+        file1: |-
+          This is a multiline
+          secret
+        file2: This is a single line secret
+      ## Optional: Define data for your secret. The .data assumes BASE64 ENCODED strings
+      ## The value for file3 is "this is a test" with base64 encoding
+      data:
+        file3: dGhpcyBpcyBhIHRlc3Q=
 ```
 
-
 ## 3.5.0
+
 Added support for podAntiAffinity.
+
 ```yaml
 app:
   # define as a template string
@@ -100,7 +109,9 @@ app:
 ```
 
 ## 3.4.0
+
 Added support for GPU scheduling.
+
 ```yaml
 app:
   requests:
@@ -109,26 +120,30 @@ app:
   gpu:
     devices: all
 ```
-These values will schedule the pod on a node where at least 2 GPUs are available. The pod will have access to __ALL__ GPUs on that node.
-If the pod should have access to only __TWO__ GPUs, then  `app.gpu.devices` should be set to `0,1` or any other tuple within (0,1,2,3).
-In this example, the pod will have access to GPU0 and GPU1 of that node. 
+
+These values will schedule the pod on a node where at least 2 GPUs are available. The pod will have access to **ALL** GPUs on that node.
+If the pod should have access to only **TWO** GPUs, then `app.gpu.devices` should be set to `0,1` or any other tuple within (0,1,2,3).
+In this example, the pod will have access to GPU0 and GPU1 of that node.
 
 ## 3.3.0
-We added support for overriding the container's command and passing arguments: 
+
+We added support for overriding the container's command and passing arguments:
 
 ```yaml
 app:
-  image: 
+  image:
     cmd: your_cmd
-    args: 
-    - an
-    - array
-    - of
-    - arguments
+    args:
+      - an
+      - array
+      - of
+      - arguments
 ```
 
 ## 3.2.0
+
 We added support for ConfigMaps and volumes based on ConfigMaps:
+
 ```yaml
 configmaps:
   - name: configmap1
@@ -151,7 +166,6 @@ configMapVolumes:
     mountPath: /configmaps/configmap2
 ```
 
-
 ## 3.1.0
 
 Add support for multiple ports.
@@ -165,10 +179,12 @@ app:
     - 8080
     - 1313
 ```
+
 Note, that the first port in the list will be used for the ingress.
 All ports will be accessible through the Service (unnamed) and opened for the container in the Pod.
 
 The old port definition will continue to work!
+
 ```yaml
 app:
   port: 8080
@@ -186,6 +202,7 @@ There is nothing changed in the helm chart itself but with version 3.7 of helm t
 Therefore, you need to make some adjustments in your CI pipeline:
 
 Variables section old:
+
 ```yaml
 variables:
   # [...]
@@ -204,6 +221,7 @@ variables:
 ```
 
 Variables section new:
+
 ```yaml
 variables:
   # ...
@@ -221,11 +239,10 @@ variables:
   # [...]
 ```
 
-
 Deploy job script old:
+
 ```yaml
-.deploy-script: &deploy-template
-  # [...]
+.deploy-script: &deploy-template # [...]
   script:
     # [...]
     # Login helm into docker registry
@@ -243,34 +260,32 @@ Deploy job script old:
 ```
 
 Deploy job script new:
+
 ```yaml
-.deploy-script: &deploy-template
-  # [...]
+.deploy-script: &deploy-template # [...]
   script:
     # [...]
     # Login helm into docker registry
     - echo ${CI_REGISTRY_PASSWORD} | helm registry login -u ${CI_REGISTRY_USER} --password-stdin ${CI_REGISTRY}
     # directly install from OCI registry:
-    - helm upgrade --install --namespace=${K8_NAMESPACE} MY_RELEASE ${HELM_CHART} --version ${HELM_CHART_VERSION} 
+    - helm upgrade --install --namespace=${K8_NAMESPACE} MY_RELEASE ${HELM_CHART} --version ${HELM_CHART_VERSION}
     # [...]
 ```
 
 You can find the current CI example pipeline working with this version [here](./.gitlab-ci.example.yml)
 
-
 Kudos to Max Fischer for figuring this out!
-
 
 ## 2.6.0
 
 ### Caution! This helm chart version only works with helm CLI version &leq; 3.6
 
 ### Features
-- Added `app.type` (default `Deployment`). Allows the user to choose `StatefulSet` as a deployment option.
 
+- Added `app.type` (default `Deployment`). Allows the user to choose `StatefulSet` as a deployment option.
 
 ## 2.5.0
 
 ### Features
-- Added `app.startupProbe` (default `null`). Allows the user to define a startup probe which is useful for pods/containers that have a long startup time.
 
+- Added `app.startupProbe` (default `null`). Allows the user to define a startup probe which is useful for pods/containers that have a long startup time.

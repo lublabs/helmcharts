@@ -7,7 +7,7 @@ app:
     repository: null
     tag: latest
     pullPolicy: Always
-  
+
   # cmd: ["your_cmd"]
   cmd: null
   # args: ["an", "array", "of", "values"]
@@ -24,36 +24,37 @@ app:
   #   - 80
   #   - 8080
 
-  # Optional: Defines the node port for the service. 
-  # Must be in range 30000-32767. 
+  # Optional: Defines the node port for the service.
+  # Must be in range 30000-32767.
   # A node port cannot be allocated by two services at the same time.
   nodePort: null
 
-  podSecurityContext: null
+  podSecurityContext:
+    null
     # runAsUser: 1000
     # runAsGroup: 3000
     # fsGroup: 2000
 
   health: "/"
   regcred: null
-  # change to `Recreate` if you want your pods to 
+  # change to `Recreate` if you want your pods to
   # be killed before the new ones are started up
   updateStrategy: RollingUpdate
 
   #
   extraEnv: |
-#    - name: DEBUG
-#      value: true
-#    - name: TEST_VAR
-#      value: this is a test
-#    - name: RELEASE_NAME
-#      value: {{ .Release.Name }}
-#    - name: PASSWORD
-#      valueFrom:
-#        secretKeyRef:
-#          name: <SECRET-NAME>
-#          key: <FIELD-IN-SECRET>
-#          optional: false
+  #    - name: DEBUG
+  #      value: true
+  #    - name: TEST_VAR
+  #      value: this is a test
+  #    - name: RELEASE_NAME
+  #      value: {{ .Release.Name }}
+  #    - name: PASSWORD
+  #      valueFrom:
+  #        secretKeyRef:
+  #          name: <SECRET-NAME>
+  #          key: <FIELD-IN-SECRET>
+  #          optional: false
 
   # Apply extraEnvFrom as string with templating such as (note the pipe after extraEnvFrom):
   # extraEnvFrom: |
@@ -68,7 +69,6 @@ app:
   #       name: my-secret
   #   - configMapRef:
   #       name: my-config
-
 
   readinessProbe: |
     httpGet:
@@ -116,7 +116,7 @@ app:
 
   gpu:
     # this is only active if app.requests.gpu is set
-    # With the default "all" it will give you access 
+    # With the default "all" it will give you access
     # to all GPU devices that are available on the node.
     # You may also define specific device-indices such as "0,2"
     # which would only give you access to GPU0 and GPU2
@@ -131,9 +131,9 @@ app:
     cpu: null
     memory: null
     ephemeralStorage: null
-    # Define the desired number of GPUs. 
-    # The pod will be placed on a node that has _at least_ the number of GPUs available. 
-    # However, it will not be ensured that the GPUs are free. 
+    # Define the desired number of GPUs.
+    # The pod will be placed on a node that has _at least_ the number of GPUs available.
+    # However, it will not be ensured that the GPUs are free.
     # If multiple workloads use the same GPUs, the GPUs will rebalance the load and the application will be a little bit slower.
     # The number here is not a limit. If you specify one GPU (`1`) and the node where the pod is placed has four (`4`) GPUs
     # available, your application will have access to all four GPUs if you do not take any measures in your code.
@@ -233,6 +233,26 @@ app:
     #     prompt: This website is password protected. Please enter a username and password.
     #     secret: basic-auth
 
+  extraContainers: []
+  # - name: cerbos
+  #   image: ghcr.io/cerbos/cerbos:0.51.0
+  #   imagePullPolicy: IfNotPresent
+  #   args:
+  #     - "server"
+  #     - "--config=/config/.cerbos.yaml"
+  #   ports:
+  #     - name: http
+  #       containerPort: 3592
+  #       protocol: TCP
+  #   volumeMounts:
+  #     - name: cerbos-config
+  #       mountPath: /config
+
+  extraVolumes: []
+  # - name: cerbos-config
+  #   configMap:
+  #     name: cerbos-config
+
   hostVolumes: []
   # - name: myhostvolume
   #   path: /path/on/host
@@ -240,7 +260,7 @@ app:
   #   see here: https://kubernetes.io/docs/concepts/storage/volumes/#hostpath
   #   type: Directory
   #   readOnly: false
-  
+
   configMapVolumes: []
   # # # if you want to use the maps defind below, prefix configMapName with "{$.Release.Name}-"
   # - name: configmap1vol
@@ -250,7 +270,6 @@ app:
   # - name: configmap2vol
   #   configMapName: "{{ $.Release.Name }}-configmap2"
   #   mountPath: /configmaps/configmap2
-
 
   configMaps: []
   # # will automatically be prefixed with "{$.Release.Name}-"
@@ -265,7 +284,6 @@ app:
   #    data:
   #      file1: ...
   #      file2: ...
-
 
   secretVolumes: []
   ### if you want to use the secrets defined below, prefix secretName with "${$.Release.Name}"
@@ -308,4 +326,3 @@ app:
   ### The value for file3 is "this is a test" with base64 encoding
   #   data:
   #     file3: dGhpcyBpcyBhIHRlc3Q=
-
