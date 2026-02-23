@@ -4,6 +4,25 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: added
+          description: added app.extraContainers for sidecar container support
+        - kind: added
+          description: added app.extraVolumes for additional pod-level volumes
+    apiVersion: v1
+    appVersion: 1.0.0
+    created: "2026-02-22T18:34:25.754408-06:00"
+    description: Deploys a LubLabs app
+    digest: 4e0be25cae7c718c9f918f72fdd62d26f02c2035af3c78d3015b77c57b62ce55
+    home: https://github.com/lublabs/helmcharts
+    maintainers:
+    - email: mahmoud@lublabs.com
+      name: Mahmoud Mousa Hamad
+    name: lublabs-generic
+    urls:
+    - https://lublabs.github.io/helmcharts/lublabs-generic-3.12.0.tgz
+    version: 3.12.0
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
           description: added app.pvc.readOnly as an optional argument
         - kind: added
           description: added app.hostVolumes[*].readOnly as an optional argument
@@ -17,7 +36,7 @@ entries:
           description: Fixed cert-manager.io/cluster-issuer annotation value in nginx template
     apiVersion: v1
     appVersion: 1.0.0
-    created: "2025-07-29T10:56:51.8130416-05:00"
+    created: "2026-02-22T18:34:25.753614-06:00"
     description: Deploys a LubLabs app
     digest: d7bc14ddf7d0dc4fe77d1192e869ae9064f4fba79dc7bc256fb0322b9831b5b5
     home: https://github.com/lublabs/helmcharts
@@ -28,4 +47,4 @@ entries:
     urls:
     - https://lublabs.github.io/helmcharts/lublabs-generic-3.11.0.tgz
     version: 3.11.0
-generated: "2025-07-29T10:56:51.8118613-05:00"
+generated: "2026-02-22T18:34:25.752343-06:00"
